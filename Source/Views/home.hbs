@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Web</title>
+    <link rel="stylesheet" href="CSS/homeUI.css">
+    <link rel="stylesheet" href="CSS/profileColor.css">
+    <script src="JS/homeUI.js"></script>
+    <script src="JS/chatLogic.js"></script>
+    <script src="JS/deletChatLogic.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+    <div class="web">
+        <nav>
+            <div class="header">
+                <img src="Icons/user.png" alt="">
+                <div class="info">
+                    {{UserProfile.name}}
+                    <span id="userPhone">{{UserProfile.phone}}</span>
+                </div>
+            </div>
+            <div class="input-search">
+                <input type="search" name="" id="" placeholder="Search user...">
+            </div>
+            <div class="otherusers">
+                {{#each chatMember}}
+                    <div class="users" onclick="sendDataOnServer('{{this.phone}}'); chatWith('{{this.name.[0]}}', '{{this.name}}', '{{this.phone}}')">
+                        <div class="person-icon {{this.name.[0]}}">{{this.name.[0]}}</div>
+                        <div class="person-info">{{this.name}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        </nav>
+        <main>
+            <div class="nochatselected" id="nochatselecteddiv">
+                No chat Selected
+            </div>
+            <div class="chat" id="insidemainchat" style="display: none;">
+                <div class="heading">
+                    {{!-- user data from js start --}}
+                    <div class="information">
+                        <div id="chatWithPersonIcon" class="person-icon"></div>
+                        <div id="chatWithPersonName" class="person-info"></div>
+                        <input type="hidden" id="opponentPhone" name="">
+                    </div>
+                    {{!-- user data from js end --}}
+                    <div class="action">
+                        <img src="Icons/bin.png" id="deleteIcon" alt="" srcset="">
+                        <img src="Icons/3dot.png" alt="" srcset="" id="settingdot">
+                        
+                    </div>
+                </div>
+                <div class="setting-popup" id="settingpopup" style="display: none;">
+                    <div class="menu" id="selectmsgicon"> Select Message </div>
+                    <div class="menu" id="clearAllchatMenu"> clear chat </div>
+                    <div class="menu"> Export Chat </div>
+                </div>
+
+                {{!-- chat data inside this div start --}}
+                <div class="chating" id="chatmainpart"></div>
+                {{!-- chat data inside this div end --}}
+
+                <div class="input-box">
+                    <div class="input-box-child">
+                        <input type="text" name="" id="chatMsgInput" placeholder="Type a message...">
+                        <div class="img" id="chatMsgSendIcon">
+                            <img src="Icons/send.png" alt="" srcset="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
